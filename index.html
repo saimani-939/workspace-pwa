@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#060810" />
+
+    <!-- PWA iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="WorkSpace" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png" />
+
+    <!-- PWA Android -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/icons/icon-96.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+    <title>WorkSpace Planner</title>
+
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body, #root { height: 100%; width: 100%; }
+      body {
+        background: #060810;
+        color: #E8ECF4;
+        font-family: 'DM Serif Display', Georgia, serif;
+        -webkit-font-smoothing: antialiased;
+        overscroll-behavior: none;
+        /* Safe area for iPhone notch */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      ::-webkit-scrollbar { width: 3px; }
+      ::-webkit-scrollbar-track { background: #0A0D18; }
+      ::-webkit-scrollbar-thumb { background: #1E2A44; border-radius: 2px; }
+      input, textarea, select { outline: none !important; -webkit-appearance: none; }
+      button { -webkit-tap-highlight-color: transparent; }
+      @keyframes fadeUp { from { transform:translateY(14px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+      @keyframes slideIn { from { transform:translateX(110%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+      @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+      @keyframes glow { 0%,100%{box-shadow:0 0 8px rgba(255,77,109,0.3);} 50%{box-shadow:0 0 22px rgba(255,77,109,0.7);} }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => { console.log('SW registered:', reg.scope); })
+            .catch(err => { console.log('SW error:', err); });
+        });
+      }
+    </script>
+  </body>
+</html>
